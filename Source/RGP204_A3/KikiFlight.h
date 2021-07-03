@@ -16,18 +16,43 @@ public:
 	AKikiFlight();
 
 	// Variables
-	UPROPERTY(VisibleAnywhere, Category = "Flight")
 	bool isRolling;
+	bool isStrafing;
 
+	// Which way is the player strafing
+	UPROPERTY(VisibleAnywhere, Category = "Flight")
+	bool forwardRightStrafe;
+	UPROPERTY(VisibleAnywhere, Category = "Flight")
+	bool upForwardStrafe;
+	UPROPERTY(VisibleAnywhere, Category = "Flight")
+	bool upRightStrafe;
+	UPROPERTY(VisibleAnywhere, Category = "Flight")
+	bool upForwardRightStrafe;
+
+	// Controls the strafing
+	FVector strafeSideSpeed;
+	FVector strafeUpForwardSpeed;
+	FVector strafeUpRightSpeed;
+	FVector strafeUpForwardRightSpeed;
 	FVector currentSpeed;
 	FVector forwardSpeed;
 	FVector sideSpeed;
+
+	// Rotation values
 	float currentTurnAmount;
 	float resetRotationValue;
 
-	UPROPERTY(EditAnywhere, Category = "Flight")
-	float speedMultiplier = 100.0f;
+	// Directional speed values
+	float forwardSpeedVal;
+	float sideSpeedVal;
+	float upSpeedVal;
 
+	UPROPERTY(EditAnywhere, Category = "Flight")
+	float forwardSpeedMultiplier = 100.0f;
+	UPROPERTY(EditAnywhere, Category = "Flight")
+	float sideSpeedMultiplier = 800.0f;
+	UPROPERTY(EditAnywhere, Category = "Flight")
+	float upSpeedMultiplier = 100.0f;
 protected:
 
 
@@ -37,6 +62,8 @@ protected:
 	// Movement
 	void MoveForward(float amount);
 	void MoveRight(float amount);
+	void MoveDiagonal();
+	void MoveUp(float amount);
 	void Turn(float amount);
 	void LookUp(float amount);
 
