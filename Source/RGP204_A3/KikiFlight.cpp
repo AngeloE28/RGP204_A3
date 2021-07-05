@@ -5,7 +5,6 @@
 
 #include <GameFramework/FloatingPawnMovement.h>
 
-
 // Sets default values
 AKikiFlight::AKikiFlight()
 {
@@ -30,16 +29,16 @@ void AKikiFlight::MoveForward(float amount)
 {
 	forwardSpeedVal = amount;
 	forwardSpeed = GetActorForwardVector() * forwardSpeedVal * forwardSpeedMultiplier;
-	if (!isStrafing)
-		FloatingPawnMovement->AddInputVector(forwardSpeed);
+
+	FloatingPawnMovement->AddInputVector(forwardSpeed);
 }
 
 void AKikiFlight::MoveRight(float amount)
 {
 	sideSpeedVal = amount;
 	sideSpeed = GetActorRightVector() * sideSpeedVal * sideSpeedMultiplier;
-	if (!isStrafing)
-		FloatingPawnMovement->AddInputVector(sideSpeed);
+
+	FloatingPawnMovement->AddInputVector(sideSpeed);
 }
 
 void AKikiFlight::Turn(float amount)
@@ -122,17 +121,17 @@ void AKikiFlight::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AKikiFlight::NotifyHit(UPrimitiveComponent* myComp, AActor* other, UPrimitiveComponent* otherComp, bool selfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit)
-{
-	Super::NotifyHit(myComp, other, otherComp, selfMoved, hitLocation, hitNormal, normalImpulse, hit);
-
-	// Deflect before colliding
-	AddControllerPitchInput(hitNormal.Size() * -GetWorld()->GetTimeSeconds()/10.0f);
-
-	// Deflect the player
-	const float deflectVal = 200.0f;
-	FloatingPawnMovement->AddInputVector(hitNormal * deflectVal);
-}
+//void AKikiFlight::NotifyHit(UPrimitiveComponent* myComp, AActor* other, UPrimitiveComponent* otherComp, bool selfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit)
+//{
+//	Super::NotifyHit(myComp, other, otherComp, selfMoved, hitLocation, hitNormal, normalImpulse, hit);
+//
+//	// Deflect before colliding
+//	AddControllerPitchInput(hitNormal.Size() * -GetWorld()->GetTimeSeconds()/10.0f);
+//
+//	// Deflect the player
+//	const float deflectVal = 200.0f;
+//	FloatingPawnMovement->AddInputVector(hitNormal * deflectVal);	
+//}
 
 // Called to bind functionality to input
 void AKikiFlight::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -146,4 +145,3 @@ void AKikiFlight::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("LookUp", this, &AKikiFlight::LookUp);
 	PlayerInputComponent->BindAxis("MoveUp", this, &AKikiFlight::MoveUp);
 }
-
