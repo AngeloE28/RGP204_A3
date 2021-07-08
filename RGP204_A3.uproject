@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:979f0e49d4ba49fd1908d022a9e3575cf8ea48ae807ba4958efcb4a9e08f6768
-size 254
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.26",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "RGP204_A3",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
+	]
+}
